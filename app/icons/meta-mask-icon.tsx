@@ -1,4 +1,4 @@
-export function MetaMaskIcon() {
+export function MetaMaskIcon(props: { className: string }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -6,6 +6,7 @@ export function MetaMaskIcon() {
       height="189"
       viewBox="0 0 212 189"
       id="metamask"
+      {...props}
     >
       <g fill="none" fillRule="evenodd">
         <polygon
