@@ -32,7 +32,7 @@ async function main() {
     })
     .once("transactionHash", (txhash) => {
       console.log(`Mining deployment transaction ...`);
-      console.log(`https://${network}.etherscan.io/tx/${txhash}`);
+      console.log(`https://sepolia.etherscan.io/tx/${txhash}`);
     });
   // The contract is now deployed on chain!
   console.log(`Contract deployed at ${deployedContract.options.address}`);
