@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "compile-smart-contract": "node ./smart-contract/compile.js"
+    "compile-smart-contract": "node ./smart-contract/compile.js",
+    "deploy-smart-contract": "node ./smart-contract/deploy.js"
   },
   "dependencies": {
     "metamask-react": "^2.7.0",
