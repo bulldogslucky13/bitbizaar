@@ -1,12 +1,12 @@
 "use client";
-import { useSDK } from "@metamask/sdk-react";
 import Image from "next/image";
 import { MetaMaskLoginForm } from "./components/meta-mask-login/meta-mask-login-form";
+import { useMetaMask } from "metamask-react";
 
 export default function Home() {
-  const { connected } = useSDK();
+  const { status: metaMaskAccountLoginStatus } = useMetaMask();
 
-  if (!connected) return <MetaMaskLoginForm />;
+  if (metaMaskAccountLoginStatus !== "connected") return <MetaMaskLoginForm />;
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">

@@ -1,5 +1,5 @@
 "use client";
-import { MetaMaskProvider as SdkMetaMaskProvider } from "@metamask/sdk-react";
+import { MetaMaskProvider as SdkMetaMaskProvider } from "metamask-react";
 
 import { PropsWithChildren } from "react";
 
@@ -9,7 +9,10 @@ export function MetaMaskProvider({ children }: PropsWithChildren) {
       sdkOptions={{
         dappMetadata: {
           name: "BitBizaar",
-          url: window.location.href,
+          url:
+            typeof window !== "undefined" && window.location.hostname
+              ? window.location.hostname
+              : "",
         },
       }}
     >
