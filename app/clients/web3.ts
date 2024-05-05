@@ -7,6 +7,14 @@ const web3Client = new Web3(
     : "UNSET_VALUE"
 );
 
+// Creating a signing account from my private key
+const web3ClientSigner = web3Client.eth.accounts.privateKeyToAccount(
+  process.env.SIGNER_PRIVATE_KEY
+    ? "0x" + process.env.SIGNER_PRIVATE_KEY
+    : "UNSET_PRIVATE_KEY"
+);
+web3Client.eth.accounts.wallet.add(web3ClientSigner);
+
 /**
  * This client is our main interaction with our BitBizaarMarketplaceContract
  */
