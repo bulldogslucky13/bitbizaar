@@ -5,41 +5,58 @@ const strokeWidth = 4;
 const r = 16 - strokeWidth;
 const c = 2 * r * Math.PI;
 
-export function LoadingSpinner(props: {
+export function LoadingSpinner({
+  variant = "outline",
+  height,
+  width,
+  value,
+  isIndeterminate = false,
+}: {
+  /**
+   * @default 'outline'
+   */
+  variant?: "outline" | "solid";
   height: number;
   width: number;
   value?: number;
+  /**
+   * @default false
+   */
   isIndeterminate?: boolean;
 }) {
   return (
     <ProgressBar
       aria-label="Loading…"
-      value={props.value}
-      isIndeterminate={props.isIndeterminate}
+      value={value}
+      isIndeterminate={isIndeterminate}
     >
       {({ percentage }) => (
         <>
           <svg
-            width={props.width}
-            height={props.height}
+            width={width}
+            height={height}
             viewBox="0 0 32 32"
             fill="none"
             strokeWidth={strokeWidth}
           >
-            <circle
-              cx={center}
-              cy={center}
-              r={r - (strokeWidth / 2 - 0.25)}
-              className="stroke-slate-100"
-              strokeWidth={0.5}
-            />
-            <circle
-              cx={center}
-              cy={center}
-              r={r + (strokeWidth / 2 - 0.25)}
-              className="stroke-slate-100"
-              strokeWidth={0.5}
-            />
+            {variant === "outline" ? (
+              <>
+                <circle
+                  cx={center}
+                  cy={center}
+                  r={r - (strokeWidth / 2 - 0.25)}
+                  className="stroke-slate-100"
+                  strokeWidth={0.5}
+                />
+                <circle
+                  cx={center}
+                  cy={center}
+                  r={r + (strokeWidth / 2 - 0.25)}
+                  className="stroke-slate-100"
+                  strokeWidth={0.5}
+                />
+              </>
+            ) : null}
             <circle
               cx={center}
               cy={center}
@@ -47,12 +64,12 @@ export function LoadingSpinner(props: {
               className="stroke-blue-400"
               strokeDasharray={`${c} ${c}`}
               strokeDashoffset={
-                c - ((props.isIndeterminate ? 50 : percentage ?? 0) / 100) * c
+                c - ((isIndeterminate ? 50 : percentage ?? 0) / 100) * c
               }
               strokeLinecap="round"
               transform="rotate(-90 16 16)"
             >
-              {props.isIndeterminate ? (
+              {isIndeterminate ? (
                 <animateTransform
                   attributeName="transform"
                   type="rotate"
