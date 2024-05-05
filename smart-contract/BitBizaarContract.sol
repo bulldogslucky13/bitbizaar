@@ -1,27 +1,28 @@
 // SPDX-License-Identifier: MIT 
 pragma solidity ^0.8.0;
 
+// This Smart Contract runs the BitBizaarItemMarketplace!
 contract BitBizaarItemMarketplace {
     // This defines a BitBizaar item 
     struct BitBizaarItem {
-        uint256 id;
-        address seller;
-        string title;
-        string description;
-        uint256 price;
-        bool sold;
+        uint256 id; // Unique identifier for every bit
+        address seller; // Bit seller address
+        string title; // Title of the bit
+        string description; // Description of the bit
+        uint256 price; // Price of the bit
+        bool sold; // Whether or not the bit is in selling state
     }
 
-    // All of the items
+    // All of the items in our marketplace
     BitBizaarItem[] public items;
 
     // All of the items, mapped to an owner
     mapping(uint256 => address) public itemToOwner;
 
-    // Event fired when an item is listed
+    // Event fired when an item is listed (never got around to using this)
     event ItemListed(uint256 id, string title, uint256 price);
 
-    // Event fired when an item is purchased
+    // Event fired when an item is purchased (never got around to using this)
     event ItemPurchased(uint256 id, string title, uint256 price, address buyer);
 
     // Creates a new item, and lists it for sale
