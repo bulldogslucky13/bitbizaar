@@ -58,7 +58,7 @@ function ItemsForSale() {
       {itemsForSale.map((item) => (
         <article
           key={item.id}
-          className="flex flex-col p-4 rounded-md bg-slate-700"
+          className="flex flex-col justify-between p-4 rounded-md bg-slate-700"
         >
           <p className="font-medium">{item.title}</p>
           <dl className="flex gap-1">

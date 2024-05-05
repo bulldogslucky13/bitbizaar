@@ -2,6 +2,7 @@ import { Button } from "react-aria-components";
 import { buyItemAction } from "./buy-item-action";
 import { useState } from "react";
 import { LoadingSpinner } from "../../loading-spinner/loading-spinner";
+import { mutate } from "swr";
 
 export function BuyItemButton({
   itemId,
@@ -23,6 +24,7 @@ export function BuyItemButton({
         setIsBuying(true);
         try {
           await buyItemAction({ itemId, price, buyerAddress });
+          await mutate("itemsForSale");
         } finally {
           setIsBuying(false);
         }
