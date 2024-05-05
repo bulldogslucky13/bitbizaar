@@ -8,7 +8,6 @@ contract BitBizaarItemMarketplace {
         address seller;
         string title;
         string description;
-        string imageUrl; // This is intended to be optional
         uint256 price;
         bool sold;
     }
@@ -26,11 +25,11 @@ contract BitBizaarItemMarketplace {
     event ItemPurchased(uint256 id, string title, uint256 price, address buyer);
 
     // Creates a new item, and lists it for sale
-    function listItem(string memory _title, string memory _description, string memory _imageUrl) external payable {
+    function listItem(string memory _title, string memory _description, uint256 _price) external {
         uint256 itemId = items.length;
-        items.push(BitBizaarItem(itemId, msg.sender, _title, _description, _imageUrl, msg.value, false));
+        items.push(BitBizaarItem(itemId, msg.sender, _title, _description, _price, false));
         itemToOwner[itemId] = msg.sender;
-        emit ItemListed(itemId, _title, msg.value);
+        emit ItemListed(itemId, _title, _price);
     }
 
     // Purchases an existing item
