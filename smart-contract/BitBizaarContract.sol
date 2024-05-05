@@ -26,11 +26,11 @@ contract BitBizaarItemMarketplace {
     event ItemPurchased(uint256 id, string title, uint256 price, address buyer);
 
     // Creates a new item, and lists it for sale
-    function listItem(string memory _title, string memory _description, string memory _imageUrl, uint256 _price) external {
+    function listItem(string memory _title, string memory _description, string memory _imageUrl) external payable {
         uint256 itemId = items.length;
-        items.push(BitBizaarItem(itemId, msg.sender, _title, _description, _imageUrl,  _price, false));
+        items.push(BitBizaarItem(itemId, msg.sender, _title, _description, _imageUrl, msg.value, false));
         itemToOwner[itemId] = msg.sender;
-        emit ItemListed(itemId, _title, _price);
+        emit ItemListed(itemId, _title, msg.value);
     }
 
     // Purchases an existing item
