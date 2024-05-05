@@ -1,10 +1,11 @@
 "use client";
 import { Suspense } from "react";
-import { CreateNewListingButton } from "./create-new-listing-button/create-new-listing-button";
+import { CreateNewListingButton } from "./create-new-listing/create-new-listing-button";
 import { useItemsForSale } from "./use-items-for-sale";
 import { truncateAddress } from "@/app/utils/truncate-address";
 import { utils } from "web3";
-import { Button } from "react-aria-components";
+import { BuyItemButton } from "./buy-item/buy-item-button";
+import { useMetaMask } from "metamask-react";
 
 export function ItemsForSaleSection() {
   return (
@@ -24,8 +25,18 @@ export function ItemsForSaleSection() {
 function ItemsForSale() {
   const { data: itemsForSale, error } = useItemsForSale();
 
+  const { account } = useMetaMask();
+
+  if (!account) {
+    return (
+      <section className="mt-2">
+        <p className="italic text-center">Sign in to see items for sale!</p>
+      </section>
+    );
+  }
+
   if (error) {
-    return <section>{error.message}</section>;
+    return <section className="mt-2">{error.message}</section>;
   }
 
   if (itemsForSale.length === 0) {
@@ -58,13 +69,11 @@ function ItemsForSale() {
             <dt>Price (ETH):</dt>
             <dd>{utils.fromWei(Number(item.price), "ether")}</dd>
           </dl>
-          <Button
-            className="px-4 py-2 bg-slate-500 rounded-md mt-2 
-          hover:bg-slate-600 active:bg-slate-700 transition-colors 0.1s"
-            onPress={() => console.log("CAMERON TODO - implement")}
-          >
-            Buy Item
-          </Button>
+          <BuyItemButton
+            itemId={Number(item.id)}
+            price={Number(item.price)}
+            buyerAddress={account}
+          />
         </article>
       ))}
     </section>
