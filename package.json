@@ -11,14 +11,17 @@
     "deploy-smart-contract": "node ./smart-contract/deploy.js"
   },
   "dependencies": {
+    "formik": "^2.4.6",
     "metamask-react": "^2.7.0",
     "next": "14.2.3",
     "react": "^18",
+    "react-aria-components": "^1.2.0",
     "react-dom": "^18",
     "react-icons": "^5.2.0",
     "solc": "^0.8.25",
     "swr": "^2.2.5",
-    "web3": "^4.8.0"
+    "web3": "^4.8.0",
+    "zod": "^3.23.6"
   },
   "devDependencies": {
     "@types/node": "^20",
